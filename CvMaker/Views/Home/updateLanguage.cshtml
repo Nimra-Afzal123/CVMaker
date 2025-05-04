@@ -1,0 +1,34 @@
+﻿@model CvMaker.Models.Language
+@{
+    ViewData["Title"] = "updateLanguage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Update Language</h1>
+<form method="post">
+	<div class="row">
+		<input type="hidden" asp-for="LangId" value="@Model.LangId" />
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="LanguageName" class="control-label">Language</label>
+			<input asp-for="LanguageName" class="form-control" value="@Model.LanguageName" />
+
+		</div>
+		
+		@* <div class="form-group col-md-6 mb-3">
+			<label asp-for="LanguageStatus" class="control-label">Status</label>
+			<select asp-for="LanguageStatus" class="form-control">
+				<option value="1">Active</option>
+				<option value="0">Not Active</option>
+			</select>
+		</div> *@
+		<input type="hidden" asp-for="PersonalinfoId" value="@Model.PersonalinfoId" />
+
+
+	</div>
+	<div class="d-grid text-center">
+		<input type="submit" value="Update" class="btn btn-primary" />
+		<input type="reset" value="Reset" class="btn btn-secondary" />
+	</div>
+</form>
+

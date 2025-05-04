@@ -1,0 +1,118 @@
+﻿@model CvMaker.Models.CVModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Horizontal Resume Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <script defer src="~/assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link id="theme-style" rel="stylesheet" href="~/assets/css/pillar-1.css">
+</head>
+
+<body>
+    <div class="text-end mb-3 container">
+        <button class="btn btn-primary" onclick="window.print()">
+            <i class="fas fa-print"></i> Print CV
+        </button>
+    </div>
+    <div class="container-fluid">
+        <div class="row no-gutters bg-white shadow-lg">
+
+            <!-- Left Column: Picture & Personal Info -->
+            <div class="col-md-4 bg-dark text-black p-4">
+                <div class="text-center mb-4">
+  @*<img class="img-fluid rounded-circle" src="~/assets/images/profile.jpg" alt="Profile Picture">*@               
+ <img class="img-fluid rounded-circle" src="~/ImageUrl/@Model.personalinfos.FirstOrDefault()?.ImageUrl" alt="Profile Picture">
+                </div>
+                <h2 class="text-uppercase text-center">@Model.personalinfos.FirstOrDefault()?.FirstName @Model.personalinfos.FirstOrDefault()?.LastName</h2>
+                <p class="text-center">@Model.personalinfos.FirstOrDefault()?.AboutTitle</p>
+                <ul class="list-unstyled text-center">
+                    <li><i class="fas fa-envelope me-2"></i>@Model.personalinfos.FirstOrDefault()?.Email</li>
+                    <li><i class="fas fa-phone me-2"></i>@Model.personalinfos.FirstOrDefault()?.Contact</li>
+                    <li><i class="fas fa-map-marker-alt me-2"></i>@Model.personalinfos.FirstOrDefault()?.Address</li>
+                    <li><i class="fas fa-flag me-2"></i>Pakistan</li>
+                </ul>
+            </div>
+
+            <!-- Right Column: Content -->
+            <div class="col-md-8 p-5">
+                <!-- Career Summary -->
+                <section class="mb-4">
+                    <h3 class="text-uppercase">Career Summary</h3>
+                    <p>@Model.personalinfos.FirstOrDefault()?.AboutUs</p>
+                </section>
+
+                <!-- Work Experience -->
+                <section class="mb-4">
+                    <h3 class="text-uppercase">Work Experience</h3>
+                    @foreach (var item in Model.experiences)
+                    {
+                        <div class="mb-3">
+                            <h5>@item.JobTitle <span class="text-muted">(@item.StartDate - @item.EndDate)</span></h5>
+                            <strong>@item.InstitueName</strong>
+                            <p>@item.Description</p>
+                        </div>
+                    }
+                </section>
+
+                <!-- Education -->
+                <section class="mb-4">
+                    <h3 class="text-uppercase">Education</h3>
+                    <ul class="list-unstyled">
+                        @foreach (var item in Model.qualifications)
+                        {
+                            <li class="mb-3">
+                                <strong>@item.Institute</strong><br />
+                                Degree: @item.Degree<br />
+                                Marks: @item.ObtainedMarks/@item.TotalMarks<br />
+                                Grade: @item.Grade<br />
+                                Passing Year: @item.PassingYear
+                            </li>
+                        }
+                    </ul>
+                </section>
+
+                <!-- Skills -->
+                <section class="mb-4">
+                    <h3 class="text-uppercase">Skills</h3>
+                    @foreach (var item in Model.skills)
+                    {
+                        <div class="mb-2">
+                            <strong>@item.SkillTitle</strong> - Level: @item.SkilLevel
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @item.SkilLevel%" aria-valuenow="@item.SkilLevel" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p>@item.description</p>
+                        </div>
+                    }
+                </section>
+
+                <!-- Languages -->
+                <section>
+                    <h3 class="text-uppercase">Languages</h3>
+                    <ul class="list-inline">
+                        @foreach (var item in Model.languages)
+                        {
+                            <li class="list-inline-item me-3">@item.LanguageName</li>
+                        }
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center pt-2 pb-5 mt-3">
+        <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a></small>
+    </footer>
+</body>
+</html>

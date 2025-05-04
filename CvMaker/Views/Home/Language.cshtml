@@ -1,0 +1,76 @@
+﻿@model CvMaker.Models.Language
+@{
+    ViewData["Title"] = "Language";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Add Languages</h2>
+
+    <form asp-controller="home" method="post" asp-action="Language" class="border p-4 rounded shadow bg-light">
+        <input type="hidden" asp-for="LangId" />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="LanguageName " class="form-label">Language</label>
+                <input type="text" asp-for="LanguageName" class="form-control" placeholder="Enter Language" />
+                @* <span asp-validation-for="Institute" class="text-danger"></span> *@
+            </div>
+           @*  <div class="col-md-6 mb-4">
+                <label asp-for="LanguageStatus" class="form-label">Status</label>
+                <select asp-for="LanguageStatus" class="form-select">
+                    <option value="1">Active</option>
+                    <option value="0">Not Active</option>
+                </select>
+            </div> *@
+            <input type="hidden" asp-for="PersonalinfoId" />
+        </div>
+
+        <div class="d-grid text-center">
+            <button type="submit" class="btn btn-success">Add Language</button>
+        </div>
+    </form>
+</div>
+
+<hr />
+<table class="table-bordered" id="languageTable">
+    <thead>
+		<tr>
+			<th>Id</th>
+			<th>Language</th>
+			
+			<th>Action</th>
+		</tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+</table>
+@section Scripts{
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#languageTable').DataTable({
+				"ajax": {
+					"url": "/home/getLanguage",
+					"type": "GET",
+					"datatype": "json"
+				},
+				"columns": [
+					{ "data": "langId" },
+					{ "data": "languageName" },
+					
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							return '<a href="/home/updateLanguage/' + row.langId + '" class="btn btn-primary">Edit</a>'
+							+ ' <a href="/home/deleteLanguage/' + row.langId + '" class="btn btn-danger">Delete</a>'
+							;
+						}
+					}
+				]
+			});
+		});
+	</script>
+}

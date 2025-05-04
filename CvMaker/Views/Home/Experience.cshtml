@@ -1,0 +1,141 @@
+﻿@model CvMaker.Models.Experience
+@{
+    ViewData["Title"] = "Experience";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Add Experience</h2>
+
+    <form asp-controller="home" method="post" asp-action="Experience" class="border p-4 rounded shadow bg-light">
+        <input type="hidden" asp-for="ExpId" />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                @* <span asp-validation-for="InstitueType" class="text-danger"></span> *@
+                <label asp-for="InstitueType" class="form-label">Institute</label>
+                <input type="text" asp-for="InstitueType" class="form-control" placeholder="Enter Institute Type" />
+                
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="InstitueName" class="form-label">Institute Name</label>
+                <input type="text" asp-for="InstitueName" class="form-control" placeholder="Enter Institue Name" />
+                @* <span asp-validation-for="PassingYear" class="text-danger"></span> *@
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="JobTitle" class="form-label">Job Title</label>
+                <input type="text" asp-for="JobTitle" class="form-control" placeholder="Enter Job Title" />
+                @* <span asp-validation-for="ObtainedMarks" class="text-danger"></span> *@
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="StartDate" class="form-label">Start Date</label>
+                <input type="date" asp-for="StartDate" class="form-control" placeholder="Enter Start Date" />
+                @* <span asp-validation-for="TotalMarks" class="text-danger"></span> *@
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="EndDate" class="form-label">End Date</label>
+                <input type="date" asp-for="EndDate" class="form-control" placeholder="Enter End Date" />
+                @* <span asp-validation-for="Percentage" class="text-danger"></span> *@
+            </div>
+
+
+         @*    <div class="col-md-6 mb-4">
+                <label asp-for="Status" class="form-label">Status</label>
+                <select asp-for="Status" class="form-select">
+                    <option value="1">Active</option>
+                    <option value="0">Not Active</option>
+                </select>
+            </div> *@
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <input type="text" asp-for="Description" class="form-control" placeholder="Enter Description" />
+                @* <span asp-validation-for="Grade" class="text-danger"></span> *@
+            </div>
+            <input type="hidden" asp-for="PersonalinfoId" />
+        </div>
+
+        <div class="d-grid text-center">
+            <button type="submit" class="btn btn-success">Add Experience</button>
+        </div>
+    </form>
+</div>
+<hr />
+<table id="experienceTable" class="table-bordered">
+    <thead>
+        <tr>
+			<th>Id</th>
+			<th>Institute Type</th>
+			<th>Institute Name</th>
+            <th>Job Title</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+			
+			<th>Description</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var table=$("#experienceTable").DataTable({
+                 ajax:{
+
+                   url:"/home/getExperience",
+
+            },
+            columns:[
+                {
+                    data:"expId"
+                },
+                {
+                    data:"institueType"
+                },
+                {
+                    data:"institueName"
+                },
+                {
+                    data:"jobTitle"
+                },
+                {
+                    data:"startDate"
+                },
+                {
+                    data:"endDate"
+                },
+               
+                {
+                    data:"description"
+                },
+               
+
+                {
+                            data: "expId",
+                        render: function(data, type, row) {
+                            return `
+                                <a href="/home/updateExperience/${data}" class="btn btn-sm btn-primary">Update</a>
+                                <a href="/home/removeExperience/${data}" class="btn btn-sm btn-danger">Delete</a>
+                            `;
+                        }
+                    },
+
+                ],
+                // to show buttons of pdf...
+                "dom":"Bfrtip",
+                "buttons":['copy','excel','csv','pdf','print']
+              });
+           })
+    </script>
+}
+

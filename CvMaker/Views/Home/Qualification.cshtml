@@ -1,0 +1,192 @@
+﻿@model CvMaker.Models.Qualification
+@{
+    ViewData["Title"] = "Qualification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Add Qualification</h2>
+
+    <form asp-controller="home" method="post" asp-action="Qualification" class="border p-4 rounded shadow bg-light">
+        <input type="hidden" asp-for="QualificationId" />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Institute" class="form-label">Institute</label>
+                <span asp-validation-for="Institute" class="text-danger"></span> 
+                <input type="text" asp-for="Institute" class="form-control" placeholder="Enter Institute Name" />
+                @* <span asp-validation-for="Institute" class="text-danger"></span> *@
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Degree" class="form-label">Degree</label>
+                <span asp-validation-for="Degree" class="text-danger"></span>
+                <input type="text" asp-for="Degree" class="form-control" placeholder="Enter Degree Name" />
+                
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="PassingYear" class="form-label">Passing Year</label>
+                <span asp-validation-for="PassingYear" class="text-danger"></span>
+                <input type="text" asp-for="PassingYear" class="form-control" placeholder="Enter Passing Year" />
+                
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="ObtainedMarks" class="form-label">Obtained Marks</label>
+                <span asp-validation-for="ObtainedMarks" class="text-danger"></span>
+                <input type="text" asp-for="ObtainedMarks" class="form-control" placeholder="Enter Obtained Marks" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="TotalMarks" class="form-label">Total Marks</label>
+                <span asp-validation-for="TotalMarks" class="text-danger"></span>
+                <input type="text" asp-for="TotalMarks" class="form-control" placeholder="Enter Total Marks" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Percentage" class="form-label">Percentage</label>
+                <span asp-validation-for="Percentage" class="text-danger"></span>
+                <input type="text" asp-for="Percentage" class="form-control" placeholder="Enter Percentage" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="Grade" class="form-label">Grade</label>
+                <span asp-validation-for="Grade" class="text-danger"></span>
+                <input type="text" asp-for="Grade" class="form-control" placeholder="Enter Grade" />
+            </div>
+
+            <div class="col-md-6 mb-4">
+              @*<label asp-for="status" class="form-label">Status</label>
+                <select asp-for="status" class="form-select">
+                    <option value="1">Active</option>
+                    <option value="0">Not Active</option>
+                </select> *@
+            </div>
+           <input type="hidden" asp-for="PersonalinfoId" />
+        </div>
+
+        <div class="d-grid text-center">
+            <button type="submit" class="btn btn-success">Add Qualification</button>
+        </div>
+    </form>
+</div>
+<hr />
+<table id="categoriesTable" class="table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Institute Name</th>
+            <th>Degree Name</th>
+            <th>Passing Year</th>
+            <th>Obtained Marks</th>
+            <th>Total Marks</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+           
+
+            <th>Action</th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+@section Scripts {
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var table=$("#categoriesTable").DataTable({
+             ajax:{
+
+               url:"/home/getCategory",
+
+        },
+        columns:[
+            {
+                data:"qualificationId"
+            },
+            {
+                data:"institute"
+            },
+				{
+					data:"degree"
+				},
+            {
+                data:"passingYear"
+            },
+            {
+                data:"obtainedMarks"
+            },
+            {
+                data:"totalMarks"
+            },
+            {
+                data:"percentage"
+            },
+            {
+                data:"grade"
+            },
+           
+
+            {
+                        data: "qualificationId",
+                    render: function(data, type, row) {
+                        return `
+                            <a href="/home/updateQual/${data}" class="btn btn-sm btn-primary">Update</a>
+                            <a href="/home/removeQual/${data}" class="btn btn-sm btn-danger">Delete</a>
+                        `;
+                    }
+                },
+
+            ],
+            // to show buttons of pdf...
+            "dom":"Bfrtip",
+            "buttons":['copy','excel','csv','pdf','print']
+          });
+       })
+</script>
+}
+
+
+
+@* <table class="table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Institue Name</th>
+            <th>Passing Year</th>
+            <th>Obtained Marks</th>
+            <th>Total Marks</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+            <th>Status</th>
+           
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+				<td>@item.QualificationId</td>
+				<td>@item.Institute</td>
+				<td>@item.PassingYear</td>
+				<td>@item.ObtainedMarks</td>
+				<td>@item.TotalMarks</td>
+				<td>@item.Percentage</td>
+				<td>@item.Grade</td>
+				<td>@item.status</td>
+              
+                <td>
+                    <a href="@Url.Action("remove","Customer",new{id=item.QualificationId})" class="btn btn-warning">Remove</a>
+                    <a href="@Url.Action("Update","Customer",new{id=item.QualificationId})" class="btn btn-success">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+   
+</table>
+ *@
+
+
+

@@ -1,0 +1,59 @@
+﻿@model CvMaker.Models.Experience
+@{
+    ViewData["Title"] = "updateExperience";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Update Experience</h1>
+<form method="post">
+	<div class="row">
+		<input type="hidden" asp-for="ExpId" value="@Model.ExpId" />
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="InstitueType" class="control-label">Institute Type</label>
+			<input asp-for="InstitueType" class="form-control" value="@Model.InstitueType" />
+
+		</div>
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="InstitueName" class="control-label">Institute Name</label>
+			<input asp-for="InstitueName" class="form-control" value="@Model.InstitueName" />
+
+		</div>
+
+
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="JobTitle" class="control-label">Job Title</label>
+			<input asp-for="JobTitle" class="form-control" value="@Model.JobTitle" />
+		</div>
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="StartDate" class="control-label">Start Date</label>
+			<input asp-for="StartDate" class="form-control" value="@Model.StartDate" />
+		</div>
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="EndDate" class="control-label">End Date</label>
+			<input asp-for="EndDate" class="form-control" value="@Model.EndDate" />
+		</div>
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="Description" class="control-label">Description</label>
+			<input asp-for="Description" class="form-control" value="@Model.Description" />
+
+		</div>
+
+		@* <div class="form-group col-md-6 mb-3">
+			<label asp-for="Status" class="control-label">Status</label>
+			<select asp-for="Status" class="form-control">
+				<option value="1">Active</option>
+				<option value="0">Not Active</option>
+			</select>
+		</div> *@
+		<input type="hidden" asp-for="PersonalinfoId" value="@Model.PersonalinfoId" />
+
+
+	</div>
+	<div class="d-grid text-center">
+		<input type="submit" value="Update" class="btn btn-primary" />
+		<input type="reset" value="Reset" class="btn btn-secondary" />
+	</div>
+</form>
+
+

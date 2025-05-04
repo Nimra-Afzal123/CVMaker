@@ -1,0 +1,60 @@
+﻿@model CvMaker.Models.Qualification
+@{
+    ViewData["Title"] = "updateQual";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Update Qualification</h1>
+<form method="post">
+	<div class="row">
+	
+		<input type="hidden" asp-for="QualificationId" value="@Model.QualificationId"/>
+		<div class="form-group col-md-6 mb-3">
+		<label asp-for="Institute" class="control-label">Institute</label>
+		<input asp-for="Institute" class="form-control" value="@Model.Institute"/>
+		
+	    </div>
+		<div class="form-group col-md-6 mb-3">
+			<label asp-for="Degree" class="control-label">Degree</label>
+			<input asp-for="Degree" class="form-control" value="@Model.Degree" />
+
+		</div>
+		<div class="form-group col-md-6 mb-3">
+		<label asp-for="PassingYear" class="control-label">Passing Year</label>
+		<input asp-for="PassingYear" class="form-control" value="@Model.PassingYear"/>
+		
+	</div>
+		<div class="form-group col-md-6 mb-3">
+		<label asp-for="ObtainedMarks" class="control-label">Obtained Marks</label>
+		<input asp-for="ObtainedMarks" class="form-control" value="@Model.ObtainedMarks" />
+	</div>
+		<div class="form-group col-md-6 mb-3">
+		<label asp-for="TotalMarks" class="control-label">Total Marks</label>
+		<input asp-for="TotalMarks" class="form-control" value="@Model.TotalMarks" />
+	</div>
+		<div class="form-group col-md-6 mb-3">
+		<label asp-for="Percentage" class="control-label">Percentage</label>
+		<input asp-for="Percentage" class="form-control" value="@Model.Percentage" />
+	</div>
+		<div class="form-group col-md-6 mb-3">
+		<label asp-for="Grade" class="control-label">Grade</label>
+		<input asp-for="Grade" class="form-control" value="@Model.Grade" />
+	</div>
+	  @*  <div class="form-group col-md-6 mb-3">
+		<label asp-for="status" class="control-label">Status</label>
+		<select asp-for="status" class="form-control">
+			<option value="1">Active</option>
+			<option value="0">Not Active</option>
+		</select>
+	   </div> *@
+	<input type="hidden" asp-for="PersonalinfoId" value="@Model.PersonalinfoId" />
+
+		
+	</div>
+	<div class="d-grid text-center">
+		<input type="submit" value="Update" class="btn btn-primary" />
+		<input type="reset" value="Reset" class="btn btn-secondary" />
+	</div>
+</form>
+
+

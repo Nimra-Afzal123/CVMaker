@@ -1,0 +1,106 @@
+﻿@model List<CvMaker.Models.Personalinfo>
+@{
+    ViewData["Title"] = "Personalinfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Personal Information</h1>
+
+<form asp-action="Personalinfo" enctype="multipart/form-data" method="post" asp-controller="home">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-row">
+        <input type="hidden" name="Id" value="@Model[0].Id" />
+        <div class="form-group col-md-6">
+            <label name="FirstName">First Name</label>
+            <input name="FirstName" class="form-control" value="@Model[0].FirstName" />
+
+        </div>
+        <div class="form-group col-md-6">
+            <label name="LastName">Last Name</label>
+            <input name="LastName" class="form-control" value="@Model[0].LastName" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label name="FatherName">Father Name</label>
+            <input name="FatherName" class="form-control" value="@Model[0].FatherName" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label name="AboutTitle">About Title</label>
+            <input name="AboutTitle" class="form-control" value="@Model[0].AboutTitle" />
+        </div>
+    </div>
+
+    <div class="form-row">
+      
+        <div class="form-group col-md-6">
+            <label name="AboutUs">Career Summary</label>
+            <textarea name="AboutUs" class="form-control">@Model[0].AboutUs</textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label name="Email">Email</label>
+            <input name="Email" class="form-control" value="@Model[0].Email" />
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label name="Cnic">CNIC</label>
+            <input name="Cnic" class="form-control" value="@Model[0].Cnic" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label name="Contact">Contact Number</label>
+            <input name="Contact" class="form-control" value="@Model[0].Contact" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label name="Address">Address</label>
+            <input name="Address" class="form-control" value="@Model[0].Address" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label name="dateofBirth">Date Of Birth</label>
+            <input name="dateofBirth" class="form-control" type="date" value="@Model[0].dateofBirth" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label name="CreatedDate">Created Date</label>
+            <input name="CreatedDate" class="form-control" type="date" value="@Model[0].CreatedDate" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label name="Password">Password</label>
+            <input name="Password" class="form-control" type="password" value="@Model[0].Password" />
+        </div>
+    </div>
+
+    <div class="row">
+       @*  <div class="form-group col-md-6">
+            <label name="Status"> Status</label>
+            <select name="Status" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Not Active</option>
+            </select>
+        </div> *@
+        <div class="form-group col-md-6">
+            <label name="ImageUrl">Upload Image</label>
+            <input name="ImageUrl" type="file" class="form-control" value="@Model[0].ImageUrl" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">Submit</button>
+
+</form>
+@section Scripts {
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	
+}

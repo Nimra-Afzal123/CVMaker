@@ -1,0 +1,110 @@
+﻿@model CvMaker.Models.Skill
+@{
+    ViewData["Title"] = "Skill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Add Skills</h2>
+
+    <form asp-controller="home" method="post" asp-action="Skill" class="border p-4 rounded shadow bg-light">
+        <input type="hidden" asp-for="SkillsId" />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="SkillTitle " class="form-label">Skill Title</label>
+                <input type="text" asp-for="SkillTitle" class="form-control" placeholder="Enter Skill" />
+                @* <span asp-validation-for="Institute" class="text-danger"></span> *@
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="SkilLevel " class="form-label">Skill Level </label>
+                <input type="text" asp-for="SkilLevel " class="form-control" placeholder="Enter Skill Level" />
+                @* <span asp-validation-for="PassingYear" class="text-danger"></span> *@
+            </div>
+
+           
+
+           @*  <div class="col-md-6 mb-4">
+                <label asp-for="status" class="form-label">Status</label>
+                <select asp-for="status" class="form-select">
+                    <option value="1">Active</option>
+                    <option value="0">Not Active</option>
+                </select>
+            </div> *@
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="description" class="form-label">Description</label>
+                <input type="text" asp-for="description" class="form-control" placeholder="Enter Description" />
+                @* <span asp-validation-for="Grade" class="text-danger"></span> *@
+            </div>
+            <input type="hidden" asp-for="PersonalinfoId" />
+        </div>
+
+        <div class="d-grid text-center">
+            <button type="submit" class="btn btn-success">Add Skill</button>
+        </div>
+    </form>
+</div>
+<hr />
+<table id="skillsTable" class="table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Skill Title</th>
+            <th>Skill Level </th>
+          
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var table=$("#skillsTable").DataTable({
+                 ajax:{
+
+                   url:"/home/getskills"
+
+            },
+            columns:[
+                {
+                    data:"skillsId"
+                },
+                {
+                    data:"skillTitle"
+                },
+                {
+                    data:"skilLevel"
+                },
+               
+               
+				{
+					data:"description"
+				},
+
+                {
+                            data: "skillsId",
+                        render: function(data, type, row) {
+                            return `
+                                <a href="/home/updateSkill/${data}" class="btn btn-sm btn-primary">Update</a>
+                                <a href="/home/removeSkill/${data}" class="btn btn-sm btn-danger">Delete</a>
+                            `;
+                        }
+                    },
+
+                ],
+                // to show buttons of pdf...
+                "dom":"Bfrtip",
+                "buttons":['copy','excel','csv','pdf','print']
+              });
+           })
+    </script>
+}
+
